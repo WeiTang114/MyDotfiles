@@ -63,3 +63,6 @@ nmap <F8> :TagbarToggle<CR>
 
 
 set hlsearch
+
+
+set encoding=utf-8
