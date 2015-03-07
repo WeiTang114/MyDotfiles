@@ -32,7 +32,10 @@ set t_Co=256
 let g:molokai_original=1 
 let g:rehash256 = 1 
 colorscheme molokai
+syntax on
 
+" wildment for autocompletion with tab
+set wildmenu
 
 " tabs
 let tabMinWidth=0
