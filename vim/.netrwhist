@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/home/tang/Desktop/連結至 大三下'
-let g:netrw_dirhist_2='/home/tang/Desktop'
-let g:netrw_dirhist_3='/home/tang/Documents/ntu-android/sdk/emulator/mksdcard'
