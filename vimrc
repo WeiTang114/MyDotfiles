@@ -262,3 +262,16 @@ set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline\ 13
 " enable powerline-fonts
 let g:airline_powerline_fonts = 1"
 
+
+" ## NERDTree ##
+autocmd VimEnter * wincmd p
+let NERDTreeShowBookmarks=1
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=0
+let NERDTreeMouseMode=2
+let NERDTreeShowHidden=1
+let NERDTreeIgnore=['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
+let NERDTreeKeepTreeInNewTab=1
+let g:nerdtree_tabs_open_on_gui_startup=0
+let NERDTreeMapOpenInTab='<ENTER>'
+
