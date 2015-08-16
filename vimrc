@@ -34,7 +34,7 @@ Plugin 'Shougo/neocomplete.vim'
 Plugin 'Rip-Rip/clang_complete'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'steffanc/cscopemaps.vim'
+"Plugin 'steffanc/cscopemaps.vim'
 Plugin 'bling/vim-airline'
 
 
@@ -243,7 +243,7 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " ## cscope ##
 if has("cscope")
-  set csprg=system('which cscope')
+  let &csprg=substitute(system('which cscope'), '\n\+$', '', '')
   set csto=1
   set cst
   set nocsverb
