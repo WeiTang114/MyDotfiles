@@ -104,7 +104,12 @@ nmap <F8> :TagbarToggle<CR>
 
 " ## clangcomplete ##
 let g:clang_use_library=1
-let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+if has('mac')
+    let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+elseif has('unix')
+    let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang-3.4.so'
+endif
+
 " if there's an error, allow us to see it
 let g:clang_complete_copen=1
 let g:clang_hl_errors=1
