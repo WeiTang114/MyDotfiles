@@ -238,7 +238,7 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 " ## cscope ##
 if has("cscope")
-  set csprg=/usr/local/bin/cscope
+  set csprg=system('which cscope')
   set csto=1
   set cst
   set nocsverb
