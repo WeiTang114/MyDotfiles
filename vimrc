@@ -111,7 +111,7 @@ elseif has('unix')
 endif
 
 " if there's an error, allow us to see it
-let g:clang_complete_copen=1
+let g:clang_complete_copen=0
 let g:clang_hl_errors=1
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
