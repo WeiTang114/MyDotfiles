@@ -95,6 +95,20 @@ set ambiwidth=double
 map <C-w> :tabp<cr>
 map <C-e> :tabn<cr>
 
+nnoremap th  :tabfirst<CR>
+nnoremap tj  :tabnext<CR>
+nnoremap tk  :tabprev<CR>
+nnoremap tl  :tablast<CR>
+nnoremap tt  :tabedit<Space>
+nnoremap tn  :tabnext<Space>
+nnoremap tm  :tabm<Space>
+nnoremap td  :tabclose<CR>
+" Alternatively use
+"nnoremap th :tabnext<CR>
+"nnoremap tl :tabprev<CR>
+"nnoremap tn :tabnew<CR>
+
+
 
 " ## Tagbar outliner ##
 nmap <F8> :TagbarToggle<CR>
@@ -111,7 +125,7 @@ elseif has('unix')
 endif
 
 " if there's an error, allow us to see it
-let g:clang_complete_copen=1
+let g:clang_complete_copen=0
 let g:clang_hl_errors=1
 let g:clang_complete_macros=1
 let g:clang_complete_patterns=0
