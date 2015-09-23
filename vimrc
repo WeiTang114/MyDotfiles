@@ -66,7 +66,7 @@ set whichwrap+=<,>,h,l,[,]
 set hlsearch
 set encoding=utf-8
 set backspace=indent,eol,start
-set ignorecase
+set smartcase
 " omni completion
 filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
