@@ -34,6 +34,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 "Plugin 'steffanc/cscopemaps.vim'
 Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdcommenter'
 
 
 " All of your Plugins must be added before the following line
@@ -54,6 +55,8 @@ filetype plugin indent on    " required
 
 
 " ## basic setups ##
+" set leader to ,
+let mapleader=","
 set background=dark
 set nu
 set expandtab
@@ -68,6 +71,7 @@ set smartcase
 " lines always seen below or behind the cursor
 set scrolloff=8
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+
 " omni completion
 filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
