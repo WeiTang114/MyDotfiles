@@ -65,6 +65,9 @@ set hlsearch
 set encoding=utf-8
 set backspace=indent,eol,start
 set smartcase
+" lines always seen below or behind the cursor
+set scrolloff=8
+nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 " omni completion
 filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
@@ -107,6 +110,11 @@ nnoremap td  :tabclose<CR>
 "nnoremap tl :tabprev<CR>
 "nnoremap tn :tabnew<CR>
 
+" Use ctrl-[hjkl] to select the active split!
+nmap <silent> <c-s-k> :wincmd k<CR>                                                                                                                       
+nmap <silent> <c-s-j> :wincmd j<CR>                                                                                                                       
+nmap <silent> <c-s-h> :wincmd h<CR>                                                                                                                       
+nmap <silent> <c-s-l> :wincmd l<CR>
 
 
 " ## Tagbar outliner ##
