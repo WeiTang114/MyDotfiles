@@ -132,7 +132,7 @@ let g:clang_use_library=1
 if has('mac')
     let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
 elseif has('unix')
-    let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang-3.4.so'
+    let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang.so.1'
 endif
 
 " if there's an error, allow us to see it
