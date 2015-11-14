@@ -71,6 +71,8 @@ set smartcase
 " lines always seen below or behind the cursor
 set scrolloff=8
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
+nnoremap <silent> <Leader>+ :exe "vertical resize " . (winheight(0) * 3/2)<CR>
+nnoremap <silent> <Leader>- :exe "vertical resize " . (winheight(0) * 2/3)<CR>
 
 " omni completion
 filetype plugin on
@@ -98,12 +100,12 @@ let tabEllipsis="..."
 let tabDivideEquel=0
 set showtabline=2
 set ambiwidth=double
-map <C-w> :tabp<cr>
-map <C-e> :tabn<cr>
+map <C-2> :tabp<cr>
+map <C-3> :tabn<cr>
 
 nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
+nnoremap tj  :tabprev<CR>
+nnoremap tk  :tabnext<CR>
 nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
 nnoremap tn  :tabnext<Space>
