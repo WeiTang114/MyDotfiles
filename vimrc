@@ -100,15 +100,13 @@ let tabEllipsis="..."
 let tabDivideEquel=0
 set showtabline=2
 set ambiwidth=double
-map <c-s-q> :tabp<cr>
-map <c-s-w> :tabn<cr>
 
 nnoremap th  :tabfirst<CR>
 nnoremap tj  :tabprev<CR>
 nnoremap tk  :tabnext<CR>
 nnoremap tl  :tablast<CR>
 nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnext<Space>
+nnoremap tn  :tabnew<Space>
 nnoremap tm  :tabm<Space>
 nnoremap td  :tabclose<CR>
 " Alternatively use
