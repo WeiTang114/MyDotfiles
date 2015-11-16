@@ -72,6 +72,8 @@ set smartcase
 set scrolloff=8
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 
+nnoremap <Leader>v :vertical resize 
+
 " omni completion
 filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
