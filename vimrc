@@ -35,6 +35,8 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'steffanc/cscopemaps.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdcommenter'
+" python autocomplete
+Plugin 'davidhalter/jedi-vim'
 
 
 " All of your Plugins must be added before the following line
@@ -73,6 +75,8 @@ set scrolloff=8
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
 nnoremap <silent> <Leader>+ :exe "vertical resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize " . (winheight(0) * 2/3)<CR>
+
+nnoremap <Leader>v :vertical resize 
 
 " omni completion
 filetype plugin on
