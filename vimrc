@@ -35,6 +35,8 @@ Plugin 'jiangmiao/auto-pairs'
 "Plugin 'steffanc/cscopemaps.vim'
 Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdcommenter'
+" python autocomplete
+Plugin 'davidhalter/jedi-vim'
 
 
 " All of your Plugins must be added before the following line
