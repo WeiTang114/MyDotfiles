@@ -158,7 +158,7 @@ let g:clang_conceal_snippets=1
 " The single one that works with clang_complete
 let g:clang_snippets_engine='clang_complete'
 
-let g:clang_periodic_quickfix=1
+let g:clang_periodic_quickfix=0
 let g:clang_jumpto_declaration_key=""
 let g:clang_jumpto_declaration_in_preview_key=""
 
