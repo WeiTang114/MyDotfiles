@@ -37,6 +37,10 @@ Plugin 'bling/vim-airline'
 Plugin 'scrooloose/nerdcommenter'
 " python autocomplete
 Plugin 'davidhalter/jedi-vim'
+" html & css fast coding
+Plugin 'mattn/emmet-vim'
+" close tag (xml, html ..)
+Plugin 'alvan/vim-closetag'
 
 
 " All of your Plugins must be added before the following line
@@ -77,6 +81,11 @@ nnoremap <silent> <Leader>+ :exe "vertical resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize " . (winheight(0) * 2/3)<CR>
 
 nnoremap <Leader>v :vertical resize 
+
+" toggle paste mode with <F2>
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
 
 " omni completion
 filetype plugin on
@@ -320,3 +329,14 @@ imap <silent><CR> <CR><Plug>AutoPairsReturn
 
 " fast wrap: <|>hello -> <hello>
 let g:AutoPairsShortcutFastWrap='<c-s-e>'
+
+
+" ## emmet (html & css fast coding)
+let g:user_emmet_install_global=0
+autocmd FileType html,css,php EmmetInstall
+
+" ## closetag.vim (html xml auto close tag)
+" filenames like *.xml, *.html, *.xhtml, ...
+let g:closetag_filenames="*.html,*.xhtml,*.phtml,*.php"
+
+set smartindent
