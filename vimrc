@@ -338,5 +338,3 @@ autocmd FileType html,css,php EmmetInstall
 " ## closetag.vim (html xml auto close tag)
 " filenames like *.xml, *.html, *.xhtml, ...
 let g:closetag_filenames="*.html,*.xhtml,*.phtml,*.php"
-
-set smartindent
