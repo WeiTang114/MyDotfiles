@@ -41,6 +41,10 @@ Plugin 'davidhalter/jedi-vim'
 Plugin 'mattn/emmet-vim'
 " close tag (xml, html ..)
 Plugin 'alvan/vim-closetag'
+" markdown
+Plugin 'gabrielelana/vim-markdown'
+" for table support in markdown
+Plugin 'godlygeek/tabular'
 
 
 " All of your Plugins must be added before the following line
