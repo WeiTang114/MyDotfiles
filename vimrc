@@ -85,6 +85,8 @@ nnoremap <silent> <Leader>+ :exe "vertical resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "vertical resize " . (winheight(0) * 2/3)<CR>
 
 nnoremap <Leader>v :vertical resize 
+" http://stackoverflow.com/questions/7163947/paste-multiple-times
+xnoremap p pgvy
 
 " toggle paste mode with <F2>
 nnoremap <F2> :set invpaste paste?<CR>
@@ -106,6 +108,7 @@ let g:molokai_original=1
 let g:rehash256 = 1
 colorscheme molokai
 syntax on
+highlight Visual term=reverse ctermbg=White ctermfg=Black
 
 
 " ## tabs ##
@@ -308,7 +311,8 @@ nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 " ## airline ##
 set laststatus=2
-set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline\ 13
+"set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline\ 13
+set guifont=Monaco\ for\ Powerline\ 12.5
 " enable powerline-fonts
 let g:airline_powerline_fonts = 1"
 
