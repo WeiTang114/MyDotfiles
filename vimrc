@@ -134,6 +134,26 @@ nnoremap td  :tabclose<CR>
 "nnoremap tl :tabprev<CR>
 "nnoremap tn :tabnew<CR>
 
+
+" ## buffers ##
+" switching buffers without saving warning
+set hidden
+
+nnoremap bn :bn<CR>
+nnoremap bf :bp<CR>
+nnoremap bg :e#<CR>
+nnoremap b1 :1b<CR>
+nnoremap b2 :2b<CR>
+nnoremap b3 :3b<CR>
+nnoremap b4 :4b<CR>
+nnoremap b5 :5b<CR>
+nnoremap b6 :6b<CR>
+nnoremap b7 :7b<CR>
+nnoremap b8 :8b<CR>
+nnoremap b9 :9b<CR>
+nnoremap b0 :10b<CR>
+
+
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-s-k> :wincmd k<CR>                                                                                                                       
 nmap <silent> <c-s-j> :wincmd j<CR>                                                                                                                       
@@ -315,6 +335,8 @@ set laststatus=2
 set guifont=Monaco\ for\ Powerline\ 12.5
 " enable powerline-fonts
 let g:airline_powerline_fonts = 1"
+" show opened buffers
+let g:airline#extensions#tabline#enabled = 1
 
 
 " ## NERDTree ##
