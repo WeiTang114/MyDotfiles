@@ -45,6 +45,8 @@ Plugin 'alvan/vim-closetag'
 Plugin 'gabrielelana/vim-markdown'
 " for table support in markdown
 Plugin 'godlygeek/tabular'
+" split maxmize-restore by <F3>
+Plugin 'szw/vim-maximizer'
 
 
 " All of your Plugins must be added before the following line
@@ -159,6 +161,8 @@ nmap <silent> <c-s-k> :wincmd k<CR>
 nmap <silent> <c-s-j> :wincmd j<CR>                                                                                                                       
 nmap <silent> <c-s-h> :wincmd h<CR>                                                                                                                       
 nmap <silent> <c-s-l> :wincmd l<CR>
+set splitright
+set splitbelow
 
 
 " ## Tagbar outliner ##
