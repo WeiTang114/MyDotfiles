@@ -47,6 +47,8 @@ Plugin 'gabrielelana/vim-markdown'
 Plugin 'godlygeek/tabular'
 " split maxmize-restore by <F3>
 Plugin 'szw/vim-maximizer'
+" pythonmode
+Plugin 'python-mode/python-mode'
 
 
 " All of your Plugins must be added before the following line
@@ -98,6 +100,9 @@ set showmode
 " omni completion
 filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
+
+"don't fold by default
+set foldlevel=99
 
 
 " ## ctags : look for tags from . to home ##
@@ -233,6 +238,7 @@ if !exists('g:neocomplete#keyword_patterns')
 endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
+
 " Plugin key-mappings.
 inoremap <expr><C-g>     neocomplete#undo_completion()
 inoremap <expr><C-l>     neocomplete#complete_common_string()
@@ -309,6 +315,20 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
     let g:clang_default_keymappings = 0
     "let g:clang_use_library = 1
 
+" neocomplete with jedi
+" https://plumz.me/archives/839/
+let g:neocomplete#enable_auto_select = 0
+let g:jedi#popup_select_first=0
+set completeopt=longest,menuone
+let g:jedi#auto_vim_configuration = 0
+let g:jedi#popup_on_dot = 0
+if !exists('g:neocomplete#force_omni_input_patterns')
+        let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\)\w*'
+"let g:jedi#completions_enabled = 0
+
+
 
 " ## cscope ##
 if has("cscope")
@@ -372,3 +392,18 @@ autocmd FileType html,css,php EmmetInstall
 " ## closetag.vim (html xml auto close tag)
 " filenames like *.xml, *.html, *.xhtml, ...
 let g:closetag_filenames="*.html,*.xhtml,*.phtml,*.php"
+
+" ## python-mode
+let g:pymode_rope_goto_definition_bind="<C-m>"
+let g:pymode_python='python'
+let g:pymode_lint_on_write=1
+let g:pymode_trim_whitespaces=1
+let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe'] 
+let g:pymode_indent=2
+
+" disable autocompletion by pymode, use jedi-vim &neo complete
+" due to conflict with jedi-vim. 
+" (don't want to auto-select first complete item)
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope_complete_on_dot = 0
+let g:pymode_rope=0
