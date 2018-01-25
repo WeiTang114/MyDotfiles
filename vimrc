@@ -1,72 +1,67 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+:" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
+Plug 'gmarik/Vundle.vim'
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
+" the following are examples of different formats supported.
+" keep plug commands between vundle#begin/end.
+" plugin on github repo
+Plug 'tpope/vim-fugitive'
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Avoid a name conflict with L9
-" Plugin 'user/L9', {'name': 'newL9'}
+Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-Plugin 'scrooloose/nerdtree'
-Plugin 'flazz/vim-colorschemes'
+Plug 'scrooloose/nerdtree'
+Plug 'flazz/vim-colorschemes'
 " show functions/vars with ctags
-Plugin 'majutsushi/tagbar'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Rip-Rip/clang_complete'
-Plugin 'kien/ctrlp.vim'
-Plugin 'jiangmiao/auto-pairs'
-"Plugin 'steffanc/cscopemaps.vim'
-Plugin 'bling/vim-airline'
-Plugin 'scrooloose/nerdcommenter'
+Plug 'majutsushi/tagbar'
+"Plug 'Shougo/neocomplete.vim'
+Plug 'Rip-Rip/clang_complete'
+Plug 'kien/ctrlp.vim'
+Plug 'jiangmiao/auto-pairs'
+"Plug 'steffanc/cscopemaps.vim'
+Plug 'bling/vim-airline'
+Plug 'scrooloose/nerdcommenter'
 " python autocomplete
-Plugin 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 " html & css fast coding
-Plugin 'mattn/emmet-vim'
+Plug 'mattn/emmet-vim'
 " close tag (xml, html ..)
-Plugin 'alvan/vim-closetag'
+Plug 'alvan/vim-closetag'
 " markdown
-Plugin 'gabrielelana/vim-markdown'
+Plug 'gabrielelana/vim-markdown'
 " for table support in markdown
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 " split maxmize-restore by <F3>
-Plugin 'szw/vim-maximizer'
+Plug 'szw/vim-maximizer'
 " pythonmode
-Plugin 'python-mode/python-mode'
+Plug 'python-mode/python-mode', { 'for': 'python' }
 
+" deoplete (neocomplete replace for vim8.0)
+Plug 'Shougo/deoplete.nvim'
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
+Plug 'zchee/deoplete-jedi'
+" show doc (argumetns) when typing a function (especially python)
+" jedi-vim has this function, while deplete-jedi needs this extension
+Plug 'Shougo/echodoc.vim'
+
+" vim-go
+" NEEDS INSTALL STEPS on github
+Plug 'fatih/vim-go'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
+
+Plug 'Shougo/denite.nvim'
+
+call plug#end()
+
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
-
-
 
 " ## basic setups ##
 " set leader to ,
@@ -96,9 +91,9 @@ xnoremap p pgvy
 nnoremap <F2> :set invpaste paste?<CR>
 set pastetoggle=<F2>
 set showmode
+set noeb vb t_vb=
 
 " omni completion
-filetype plugin on
 "set omnifunc=syntaxcomplete#Complete
 
 "don't fold by default
@@ -213,121 +208,29 @@ let g:clang_jumpto_declaration_in_preview_key=""
 
 
 
-"" ## neocomplete ##
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-" Define dictionary.
-let g:neocomplete#sources#dictionary#dictionaries = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
-
-" Define keyword.
-if !exists('g:neocomplete#keyword_patterns')
-    let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-  "return neocomplete#close_popup() . "\<CR>"
-  "" For no inserting <CR> key.
-  ""return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-"endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplete#close_popup()
-inoremap <expr><C-e>  neocomplete#cancel_popup()
-" Close popup by <Space>.
-"inoremap <expr><Space> pumvisible() ? neocomplete#close_popup() : "\<Space>"
-
-" For cursor moving in insert mode(Not recommended)
-"inoremap <expr><Left>  neocomplete#close_popup() . "\<Left>"
-"inoremap <expr><Right> neocomplete#close_popup() . "\<Right>"
-"inoremap <expr><Up>    neocomplete#close_popup() . "\<Up>"
-"inoremap <expr><Down>  neocomplete#close_popup() . "\<Down>"
-" Or set this.
-"let g:neocomplete#enable_cursor_hold_i = 1
-" Or set this.
-"let g:neocomplete#enable_insert_char_pre = 1
-
-" AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
-
-" Shell like behavior(not recommended).
-"set completeopt+=longest
-"let g:neocomplete#enable_auto_select = 1
-"let g:neocomplete#disable_auto_complete = 1
-"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=jedi#completions
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
-" Enable heavy omni completion.
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
-" For perlomni.vim setting.
-" https://github.com/c9s/perlomni.vim
-let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-    if !exists('g:neocomplete#force_omni_input_patterns')
-      let g:neocomplete#force_omni_input_patterns = {}
-    endif
-    let g:neocomplete#force_omni_input_patterns.c =
-          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-    let g:neocomplete#force_omni_input_patterns.cpp =
-          \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-    let g:neocomplete#force_omni_input_patterns.objc =
-          \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)'
-    let g:neocomplete#force_omni_input_patterns.objcpp =
-          \ '\[\h\w*\s\h\?\|\h\w*\%(\.\|->\)\|\h\w*::\w*'
-    let g:clang_complete_auto = 0
-    let g:clang_auto_select = 0
-    let g:clang_default_keymappings = 0
-    "let g:clang_use_library = 1
-
-" neocomplete with jedi
-" https://plumz.me/archives/839/
-let g:neocomplete#enable_auto_select = 0
-let g:jedi#popup_select_first=0
 set completeopt=longest,menuone
-let g:jedi#auto_vim_configuration = 0
-let g:jedi#popup_on_dot = 0
-if !exists('g:neocomplete#force_omni_input_patterns')
-        let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python = '\%([^. \t]\.\|^\s*@\)\w*'
-"let g:jedi#completions_enabled = 0
 
+
+" ## deoplete ##
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
+call deoplete#enable()
+
+" for tab to select options
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+endfunction
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 " ## cscope ##
@@ -395,7 +298,7 @@ let g:closetag_filenames="*.html,*.xhtml,*.phtml,*.php"
 
 " ## python-mode
 let g:pymode_rope_goto_definition_bind="<C-m>"
-let g:pymode_python='python'
+let g:pymode_python='python3'
 let g:pymode_lint_on_write=1
 let g:pymode_trim_whitespaces=1
 let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe'] 
@@ -407,3 +310,25 @@ let g:pymode_indent=2
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope=0
+
+
+" ## vim-go
+" auto import at save
+let g:go_fmt_command = "goimports"
+
+
+" ##denite
+call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
+call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
+call denite#custom#map('normal', 'dd', '<denite:do_action:delete>', 'noremap')
+noremap .d :Denite -auto-resize -highlight-mode-insert=Search file_rec buffer<CR>
+noremap .b :Denite -auto-resize -highlight-mode-insert=Search buffer<CR>
+noremap .j :Denite -auto-resize -highlight-mode-insert=Search jump<CR>
+noremap .l :Denite -auto-resize -highlight-mode-insert=Search line<CR>
+noremap .p :Denite -auto-resize -highlight-mode-insert=Search file_rec<CR>
+noremap .r :Denite -auto-resize -highlight-mode-insert=Search outline<CR>
+
+
+
