@@ -301,8 +301,11 @@ let g:pymode_rope_goto_definition_bind="<C-m>"
 let g:pymode_python='python3'
 let g:pymode_lint_on_write=1
 let g:pymode_trim_whitespaces=1
-let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe'] 
+let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe', 'pylint'] 
 let g:pymode_indent=2
+"let g:pymode_lint_ignore = "C0111"
+let g:pymode_lint_options_pylint = {'disable':'C0111'}
+
 
 " disable autocompletion by pymode, use jedi-vim &neo complete
 " due to conflict with jedi-vim. 
@@ -310,11 +313,13 @@ let g:pymode_indent=2
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope_complete_on_dot = 0
 let g:pymode_rope=0
+autocmd BufWritePost *.py :PymodeLintAuto
 
 
 " ## vim-go
 " auto import at save
 let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
 
 
 " ##denite
