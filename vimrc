@@ -41,6 +41,7 @@ Plug 'szw/vim-maximizer'
 Plug 'python-mode/python-mode', { 'for': 'python' }
 
 " deoplete (neocomplete replace for vim8.0)
+" NEEDS INSTALL pip3 install --user neovim
 Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
@@ -56,6 +57,9 @@ Plug 'fatih/vim-go'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 Plug 'Shougo/denite.nvim'
+
+" c++ c format
+Plug 'rhysd/vim-clang-format'
 
 call plug#end()
 
@@ -98,6 +102,14 @@ set noeb vb t_vb=
 
 "don't fold by default
 set foldlevel=99
+
+" don't replace tab with space
+autocmd FileType proto set noexpandtab
+autocmd FileType proto set smartindent
+
+autocmd FileTYpe c,cpp,h set smartindent 
+    
+    
 
 
 " ## ctags : look for tags from . to home ##
@@ -297,7 +309,7 @@ autocmd FileType html,css,php EmmetInstall
 let g:closetag_filenames="*.html,*.xhtml,*.phtml,*.php"
 
 " ## python-mode
-let g:pymode_rope_goto_definition_bind="<C-m>"
+let g:pymode_rope_goto_def_newwin = "new" " open found definition in new window
 let g:pymode_python='python3'
 let g:pymode_lint_on_write=1
 let g:pymode_trim_whitespaces=1
@@ -322,7 +334,7 @@ let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 
 
-" ##denite
+" ## denite
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
 call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
@@ -336,4 +348,23 @@ noremap .p :Denite -auto-resize -highlight-mode-insert=Search file_rec<CR>
 noremap .r :Denite -auto-resize -highlight-mode-insert=Search outline<CR>
 
 
+" ## deoplete-jedi
+"set omnifunc=jedi#completions
+setlocal omnifunc=python3complete#Complete
+
+
+let g:python3_host_prog = '/usr/local/bin/python3'
+
+
+" ## vim-clang-format
+" auto format on saving
+let g:clang_format#auto_format=1
+let g:clang_format#style_options = {
+            \ "AccessModifierOffset" : -4,
+            \ "AllowShortIfStatementsOnASingleLine" : "true",
+            \ "AlwaysBreakTemplateDeclarations" : "true",
+            \ "Standard" : "C++11",
+            \ "UseTab" : "false",
+            \ "ColumnLimit" : 0,
+            \ "BreakBeforeBraces" : "Linux",}
 
