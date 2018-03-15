@@ -318,7 +318,6 @@ let g:pymode_indent=2
 "let g:pymode_lint_ignore = "C0111"
 let g:pymode_lint_options_pylint = {'disable':'C0111'}
 
-
 " disable autocompletion by pymode, use jedi-vim &neo complete
 " due to conflict with jedi-vim. 
 " (don't want to auto-select first complete item)
