@@ -83,6 +83,12 @@ set hlsearch
 set encoding=utf-8
 set backspace=indent,eol,start
 set smartcase
+
+" backspace delete spaces
+" https://vi.stackexchange.com/questions/15022/vim-erasing-multiple-spaces-used-as-indentation
+set smarttab
+"set softtabstop=4
+
 " lines always seen below or behind the cursor
 set scrolloff=8
 nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
@@ -109,8 +115,7 @@ set foldlevel=99
 autocmd FileType proto set noexpandtab
 autocmd FileType proto set smartindent
 
-autocmd FileTYpe c,cpp,h set smartindent 
-    
+autocmd FileType c,cpp,h set smartindent 
     
 
 
@@ -304,7 +309,7 @@ noremap .r :Denite -auto-resize -highlight-mode-insert=Search outline<CR>
 setlocal omnifunc=python3complete#Complete
 
 
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/usr/bin/python3'
 
 
 " ## vim-clang-format
