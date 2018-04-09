@@ -21,7 +21,7 @@ Plug 'majutsushi/tagbar'
 "Plug 'Shougo/neocomplete.vim'
 Plug 'Rip-Rip/clang_complete'
 Plug 'kien/ctrlp.vim'
-Plug 'jiangmiao/auto-pairs'
+Plug 'cohama/lexima.vim'
 "Plug 'steffanc/cscopemaps.vim'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdcommenter'
@@ -290,15 +290,6 @@ let NERDTreeKeepTreeInNewTab=1
 let g:nerdtree_tabs_open_on_gui_startup=0
 let NERDTreeMapOpenInTab='<ENTER>'
 map <f9> :NERDTreeToggle<CR>
-
-" ## Auto-Pairs ##
-" auto-pairs workaround for buggy <CR> mapping
-let g:AutoPairsMapCR=0
-imap <silent><CR> <CR><Plug>AutoPairsReturn
-
-" fast wrap: <|>hello -> <hello>
-let g:AutoPairsShortcutFastWrap='<c-s-e>'
-
 
 " ## emmet (html & css fast coding)
 let g:user_emmet_install_global=0
