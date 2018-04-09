@@ -19,7 +19,6 @@ Plug 'flazz/vim-colorschemes'
 " show functions/vars with ctags
 Plug 'majutsushi/tagbar'
 "Plug 'Shougo/neocomplete.vim'
-Plug 'Rip-Rip/clang_complete'
 Plug 'kien/ctrlp.vim'
 Plug 'cohama/lexima.vim'
 "Plug 'steffanc/cscopemaps.vim'
@@ -60,6 +59,9 @@ Plug 'Shougo/denite.nvim'
 
 " c++ c format
 Plug 'rhysd/vim-clang-format'
+" c/c++ auto complete based on libclang and deoplete
+Plug 'zchee/deoplete-clang'
+
 
 call plug#end()
 
@@ -179,47 +181,6 @@ set splitbelow
 
 " ## Tagbar outliner ##
 nmap <F8> :TagbarToggle<CR>
-
-
-
-
-" ## clangcomplete ##
-let g:clang_use_library=1
-if has('mac')
-    let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-elseif has('unix')
-    let g:clang_library_path='/usr/lib/x86_64-linux-gnu/libclang.so.1'
-endif
-
-" if there's an error, allow us to see it
-let g:clang_complete_copen=0
-let g:clang_hl_errors=1
-let g:clang_complete_macros=1
-let g:clang_complete_patterns=0
-" Limit memory use
-let g:clang_memory_percent=70
-" Remove -std=c++11 if you don't use C++ for everything like I do.
-let g:clang_user_options=' -std=c++11 || exit 0'
-" Set this to 0 if you don't want autoselect, 1 if you want autohighlight,
-" and 2 if you want autoselect. 0 will make you arrow down to select the first
-" option, 1 will select the first option for you, but won't insert it unless you
-" press enter. 2 will automatically insert what it thinks is right. 1 is the most
-" convenient IMO, and it defaults to 0.
-let g:clang_auto_select=1
-
-set conceallevel=2
-set concealcursor=vin
-let g:clang_snippets=1
-let g:clang_conceal_snippets=1
-" The single one that works with clang_complete
-let g:clang_snippets_engine='clang_complete'
-
-let g:clang_periodic_quickfix=0
-let g:clang_jumpto_declaration_key=""
-let g:clang_jumpto_declaration_in_preview_key=""
-
-
-
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -356,5 +317,17 @@ let g:clang_format#style_options = {
             \ "Standard" : "C++11",
             \ "UseTab" : "false",
             \ "ColumnLimit" : 0,
-            \ "BreakBeforeBraces" : "Linux",}
+            \ "BreakBeforeBraces" : "Attach",}
+
+
+" ## deoplete-clang
+" Requirement: install libclang and libclang(5, etc)-dev for shared libraries
+" and headers. Requires deoplete and vim8.
+if has('mac')
+    let g:deoplete#sources#clang#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+    let g:deoplete#sources#clang#clang_header='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/'
+elseif has('unix')
+    let g:deoplete#sources#clang#libclang_path='/usr/lib/x86_64-linux-gnu/libclang.so.1'
+    let g:deoplete#sources#clang#clang_header='/usr/include/clang/'
+endif
 
