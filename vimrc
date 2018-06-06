@@ -20,7 +20,8 @@ Plug 'flazz/vim-colorschemes'
 Plug 'majutsushi/tagbar'
 "Plug 'Shougo/neocomplete.vim'
 Plug 'kien/ctrlp.vim'
-Plug 'cohama/lexima.vim'
+" better auto pairs with shift-tab to jump out ()
+Plug 'Raimondi/delimitMate'
 "Plug 'steffanc/cscopemaps.vim'
 Plug 'bling/vim-airline'
 Plug 'scrooloose/nerdcommenter'
@@ -204,11 +205,14 @@ let g:deoplete#enable_at_startup = 1
 call deoplete#enable()
 
 " for tab to select options
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-endfunction
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" Disable this for not overwriting <cr> to have delimitMate_expand_cr work
+" correctly
+" Just select in the popup with <C-n>, <C-P>
+"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+"function! s:my_cr_function()
+  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+"endfunction
+"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 
 " ## cscope ##
@@ -336,3 +340,8 @@ elseif has('unix')
     let g:deoplete#sources#clang#clang_header='/usr/include/clang/'
 endif
 
+
+
+" ## DelimitMate
+let g:delimitMate_expand_cr = 1
+let g:delimitMate_expand_space = 1
