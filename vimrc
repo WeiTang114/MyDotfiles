@@ -14,7 +14,7 @@ Plug 'tpope/vim-fugitive'
 " Pass the path to set the runtimepath properly.
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
 
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree'
 Plug 'flazz/vim-colorschemes'
 " show functions/vars with ctags
 Plug 'majutsushi/tagbar'
@@ -38,7 +38,7 @@ Plug 'godlygeek/tabular'
 " split maxmize-restore by <F3>
 Plug 'szw/vim-maximizer'
 " pythonmode
-Plug 'python-mode/python-mode', { 'for': 'python' }
+"Plug 'python-mode/python-mode', { 'for': 'python' }
 
 " deoplete (neocomplete replace for vim8.0)
 " NEEDS INSTALL pip3 install --user neovim
@@ -46,7 +46,7 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
-Plug 'zchee/deoplete-jedi'
+"Plug 'zchee/deoplete-jedi'
 " show doc (argumetns) when typing a function (especially python)
 " jedi-vim has this function, while deplete-jedi needs this extension
 Plug 'Shougo/echodoc.vim'
@@ -63,6 +63,20 @@ Plug 'rhysd/vim-clang-format'
 " c/c++ auto complete based on libclang and deoplete
 Plug 'zchee/deoplete-clang'
 
+" jinja 
+Plug 'lepture/vim-jinja'
+
+" Dockerfile syntax
+Plug 'ekalinin/Dockerfile.vim'
+
+" yaml
+Plug 'chase/vim-ansible-yaml'
+
+" jsonnet
+Plug 'google/vim-jsonnet'
+
+" bolt color
+Plug 'bpietravalle/vim-bolt'
 
 call plug#end()
 
@@ -184,6 +198,11 @@ nmap <silent> <c-s-l> :wincmd l<CR>
 set splitright
 set splitbelow
 
+" yaml
+autocmd FileType yaml,yml setlocal ts=2 sts=2 sw=2 expandtab
+
+" remove trailing whitespaces
+autocmd FileType jinja,yaml,go,Dockerfile,python autocmd BufWritePre <buffer> %s/\s\+$//e
 
 " ## Tagbar outliner ##
 nmap <F8> :TagbarToggle<CR>
@@ -270,50 +289,73 @@ autocmd FileType html,css,php EmmetInstall
 let g:closetag_filenames="*.html,*.xhtml,*.phtml,*.php"
 
 " ## python-mode
-let g:pymode_rope_goto_def_newwin = "new" " open found definition in new window
-let g:pymode_python='python3'
-let g:pymode_lint_on_write=1
-let g:pymode_trim_whitespaces=1
-let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe', 'pylint'] 
-let g:pymode_indent=2
-"let g:pymode_lint_ignore = "C0111"
-let g:pymode_lint_options_pylint = {'disable':'C0111'}
+"let g:pymode_rope_goto_def_newwin = "new" " open found definition in new window
+"let g:pymode_python='python3'
+"let g:pymode_lint_on_write=1
+"let g:pymode_trim_whitespaces=1
+"let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe', 'pylint'] 
+"let g:pymode_indent=2
+""let g:pymode_lint_ignore = "C0111"
+"let g:pymode_lint_options_pylint = {'disable':'C0111'}
 
-" disable autocompletion by pymode, use jedi-vim &neo complete
-" due to conflict with jedi-vim. 
-" (don't want to auto-select first complete item)
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope=0
-autocmd BufWritePost *.py :PymodeLintAuto
+"" disable autocompletion by pymode, use jedi-vim &neo complete
+"" due to conflict with jedi-vim. 
+"" (don't want to auto-select first complete item)
+"let g:pymode_rope_lookup_project = 0
+"let g:pymode_rope_complete_on_dot = 0
+"let g:pymode_rope=0
+"let g:pymode_rope_completion = 0
+"autocmd BufWritePost *.py :PymodeLintAuto
 
 
 " ## vim-go
 " auto import at save
 let g:go_fmt_command = "goimports"
+let g:go_fmt_options = {
+    \ 'gofmt': '-s',
+    \ 'goimports': '-local htc.com -local aip',
+    \ }
 let g:go_fmt_autosave = 1
+let g:go_def_mode = 'gopls'
+"let g:go_def_mode = 'godef'
+
 
 
 " ## denite
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-n>', '<denite:move_to_next_line>', 'noremap')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>', 'noremap')
-call denite#custom#map('insert', '<C-p>', '<denite:move_to_previous_line>', 'noremap')
-call denite#custom#map('normal', 'dd', '<denite:do_action:delete>', 'noremap')
-noremap .d :Denite -auto-resize -highlight-mode-insert=Search file_rec buffer<CR>
-noremap .b :Denite -auto-resize -highlight-mode-insert=Search buffer<CR>
-noremap .j :Denite -auto-resize -highlight-mode-insert=Search jump<CR>
-noremap .l :Denite -auto-resize -highlight-mode-insert=Search line<CR>
-noremap .p :Denite -auto-resize -highlight-mode-insert=Search file_rec<CR>
-noremap .r :Denite -auto-resize -highlight-mode-insert=Search outline<CR>
+
+noremap .d :Denite -auto-resize file/rec buffer<CR>
+noremap .b :Denite -auto-resize buffer<CR>
+noremap .j :Denite -auto-resize jump<CR>
+noremap .l :Denite -auto-resize line<CR>
+noremap .p :Denite -auto-resize file/rec<CR>
+noremap .r :Denite -auto-resize outline<CR>
+
+" Define mappings
+autocmd FileType denite call s:denite_my_settings()
+function! s:denite_my_settings() abort
+  nnoremap <silent><buffer><expr> <CR>
+  \ denite#do_map('do_action')
+  nnoremap <silent><buffer><expr> d
+  \ denite#do_map('do_action', 'delete')
+  nnoremap <silent><buffer><expr> p
+  \ denite#do_map('do_action', 'preview')
+  nnoremap <silent><buffer><expr> q
+  \ denite#do_map('quit')
+  nnoremap <silent><buffer><expr> i
+  \ denite#do_map('open_filter_buffer')
+  nnoremap <silent><buffer><expr> <Space>
+  \ denite#do_map('toggle_select').'j'
+endfunction
+
 
 
 " ## deoplete-jedi
 "set omnifunc=jedi#completions
-setlocal omnifunc=python3complete#Complete
+"setlocal omnifunc=python3complete#Complete
 
 
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python3'
 
 
 " ## vim-clang-format
@@ -342,6 +384,21 @@ endif
 
 
 
+" ## deoplete-go
+let g:deoplete#sources#go#gocode_binary = '/Users/Tang_Lee/workspace/go/bin/gocode'
+
+
 " ## DelimitMate
 let g:delimitMate_expand_cr = 1
 let g:delimitMate_expand_space = 1
+
+" ## vim-jinja
+au BufNewFile,BufRead *.jinja set ft=jinja
+
+" ## jsonnet
+autocmd BufNewFile,BufRead *.jsonnet,*.json set tabstop=2
+autocmd BufNewFile,BufRead *.jsonnet,*.json set shiftwidth=2
+autocmd BufNewFile,BufRead *.jsonnet,*.json set smartindent
+autocmd BufNewFile,BufRead *.jsonnet,*.json set expandtab
+
+
