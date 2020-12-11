@@ -99,10 +99,10 @@ export LC_ALL=en_US.UTF-8
 # 把/usr/lib/python2.7/dist-packages/ 放到PYTHONPATH裡，/usr/lib/python2.7/site.py會因為duplicate而把預設放在第一位的那個刪掉。
 # 原本sys.path會先放 /usr/lib/python2.7/dist-packages，才接PYTHONPATH
 # 這樣做可以讓/usr/lib/python2.7/dist-packages排在PYTHONPATH內或後面。
-export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages/:/usr/lib/python2.7/dist-packages/
+#export PYTHONPATH=$PYTHONPATH:/usr/local/lib/python2.7/dist-packages/:/usr/lib/python2.7/dist-packages/
 
 alias ll="ls -l"
-export LD_LIBRARY_PATH=/usr/lib/:/usr/local/lib/:/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH
+#export LD_LIBRARY_PATH=/usr/lib/:/usr/local/lib/:/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH
 
 alias ls='ls --color'
 
@@ -119,5 +119,7 @@ alias tkss='tmux kill-session -t'
 
 # local first, system second. 
 # MUST ADD THE SYSTEM ONES HERE TO FORCE IT TO BE AT THE SECOND, OR IT WOULD BE THE FIRST.
-export PYTHONPATH=$HOME/.local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages/:$PYTHONPATH
+#export PYTHONPATH=$HOME/.local/lib/python2.7/site-packages:/usr/local/lib/python2.7/dist-packages:/usr/lib/python2.7/dist-packages/:$PYTHONPATH
+export PYTHONPATH=$HOME/.local/lib/python3.8/site-packages:/usr/local/lib/python3.8/dist-packages:/usr/lib/python3.8/dist-packages/:$PYTHONPATH
 
+export PATH=$PATH:$HOME/depot_tools
