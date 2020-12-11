@@ -108,6 +108,7 @@ alias ls='ls --color'
 
 # autojump
 [[ -s $HOME/.autojump/etc/profile.d/autojump.sh  ]] && source $HOME/.autojump/etc/profile.d/autojump.sh
+[[ -s /usr/share/autojump/autojump.sh ]] && source /usr/share/autojump/autojump.sh
 
 #tmux alias
 alias ta='tmux attach -t'
