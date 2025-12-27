@@ -1,0 +1,45 @@
+# ~/.config/starship.toml
+
+# Insert a blank line between shell prompts
+add_newline = true
+
+# Replace the "❯" symbol
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+# Show hostname
+[hostname]
+ssh_only = true
+format = "[$hostname]($style) "
+style = "bold dimmed white"
+
+# Disable the package module
+[package]
+disabled = true
+
+# Disable cloud modules
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true
+
+[azure]
+disabled = true
+
+# Disable language modules as requested
+[nodejs]
+disabled = true
+
+[python]
+disabled = true
+
+[golang]
+disabled = true
+
+[c]
+disabled = true
+
+[java]
+disabled = true
