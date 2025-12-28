@@ -16,7 +16,13 @@ source $ZSH/oh-my-zsh.sh
 # --- 2. 現代化工具初始化 (Rust Stack) ---
 
 # put brew in path
-eval "$(/opt/homebrew/bin/brew shellenv)"
+#   Apple Silicon: /opt/homebrew/bin/brew
+#   Intel: /usr/local/bin/brew
+if [ -f "/opt/homebrew/bin/brew" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [ -f "/usr/local/bin/brew" ]; then
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
 
 # Starship: 極速 Prompt
 # 需先安裝: curl -sS https://starship.rs/install.sh | sh
