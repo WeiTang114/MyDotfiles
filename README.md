@@ -22,3 +22,22 @@ It will automatically:
 
 ### 3. Restart Terminal
 Open a new terminal session to enjoy your new setup!
+
+## 🔄 Reset / Update
+If you want to update your tools or reset your configuration:
+
+### Update Everything
+Run the install script again. It is safe to run multiple times.
+```bash
+./install.sh
+```
+
+### Reset Vim Plugins
+If Vim is acting up, you can reinstall all plugins:
+```bash
+# Reinstall Plugins
+vim +PlugInstall +qall
+
+# Reinstall Coc Extensions
+vim +"CocInstall -sync coc-pyright coc-json coc-html coc-css coc-sh coc-clangd" +qall
+```

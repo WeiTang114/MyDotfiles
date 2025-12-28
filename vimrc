@@ -1,364 +1,157 @@
-:" Specify a directory for plugins
-" - For Neovim: ~/.local/share/nvim/plugged
-" - Avoid using standard Vim directory names like 'plugin'
+" ==========================================
+"  MyDotfiles Modern Vim Configuration
+" ==========================================
+
+" --- 1. Plugins (Vim-Plug) ---
 call plug#begin('~/.vim/plugged')
 
-" let Vundle manage Vundle, required
-Plug 'gmarik/Vundle.vim'
+" Essentials
+Plug 'tpope/vim-fugitive'        " Git integration
+Plug 'tpope/vim-fugitive'        " Git integration
+Plug 'preservim/nerdcommenter'   " Commenter
+Plug 'vim-airline/vim-airline'   " Status bar
+Plug 'vim-airline/vim-airline-themes'
+Plug 'flazz/vim-colorschemes'    " Colors
+Plug 'liuchengxu/vista.vim'      " Modern Code Outline (LSP)
 
-" the following are examples of different formats supported.
-" keep plug commands between vundle#begin/end.
-" plugin on github repo
-Plug 'tpope/vim-fugitive'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plug 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Modern Tools
+Plug 'neoclide/coc.nvim', {'branch': 'release'} " LSP & Completion (The VSCode killer)
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'          " Fuzzy finder
 
-Plug 'scrooloose/nerdtree'
-Plug 'flazz/vim-colorschemes'
-" show functions/vars with ctags
-Plug 'majutsushi/tagbar'
-"Plug 'Shougo/neocomplete.vim'
-Plug 'kien/ctrlp.vim'
-" better auto pairs with shift-tab to jump out ()
-Plug 'Raimondi/delimitMate'
-"Plug 'steffanc/cscopemaps.vim'
-Plug 'bling/vim-airline'
-Plug 'scrooloose/nerdcommenter'
-" python autocomplete
-"Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-" html & css fast coding
-Plug 'mattn/emmet-vim'
-" close tag (xml, html ..)
-Plug 'alvan/vim-closetag'
-" markdown
-Plug 'gabrielelana/vim-markdown'
-" for table support in markdown
-Plug 'godlygeek/tabular'
-" split maxmize-restore by <F3>
-Plug 'szw/vim-maximizer'
-" pythonmode
-Plug 'python-mode/python-mode', { 'for': 'python' }
-
-" deoplete (neocomplete replace for vim8.0)
-" NEEDS INSTALL pip3 install --user neovim
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
-
-Plug 'zchee/deoplete-jedi'
-" show doc (argumetns) when typing a function (especially python)
-" jedi-vim has this function, while deplete-jedi needs this extension
-Plug 'Shougo/echodoc.vim'
-
-" vim-go
-" NEEDS INSTALL STEPS on github
-Plug 'fatih/vim-go'
-Plug 'zchee/deoplete-go', { 'do': 'make' }
-
-Plug 'Shougo/denite.nvim'
-
-" c++ c format
-Plug 'rhysd/vim-clang-format'
-" c/c++ auto complete based on libclang and deoplete
-Plug 'zchee/deoplete-clang'
-
+" Syntax & Language Support
+Plug 'sheerun/vim-polyglot'      " Multi-language syntax support
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'mattn/emmet-vim'           " HTML/CSS expansion
+Plug 'alvan/vim-closetag'        " Auto close HTML tags
 
 call plug#end()
 
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-
-" ## basic setups ##
-" set leader to ,
+" --- 2. Basic Settings ---
 let mapleader=","
-set background=dark
-set nu
-set expandtab
+set nocompatible
+filetype plugin indent on
+syntax on
+set encoding=utf-8
+set number
+set cursorline            " Highlight current line
+set expandtab             " Use spaces instead of tabs
 set tabstop=4
 set shiftwidth=4
-set mouse=a
-set whichwrap+=<,>,h,l,[,]
-set hlsearch
-set encoding=utf-8
-set backspace=indent,eol,start
-set smartcase
-
-" backspace delete spaces
-" https://vi.stackexchange.com/questions/15022/vim-erasing-multiple-spaces-used-as-indentation
-set smarttab
-"set softtabstop=4
-
-" lines always seen below or behind the cursor
-set scrolloff=8
-nnoremap <Leader>zz :let &scrolloff=999-&scrolloff<CR>
-nnoremap <silent> <Leader>+ :exe "vertical resize " . (winheight(0) * 3/2)<CR>
-nnoremap <silent> <Leader>- :exe "vertical resize " . (winheight(0) * 2/3)<CR>
-
-nnoremap <Leader>v :vertical resize 
-" http://stackoverflow.com/questions/7163947/paste-multiple-times
-xnoremap p pgvy
-
-" toggle paste mode with <F2>
-nnoremap <F2> :set invpaste paste?<CR>
-set pastetoggle=<F2>
-set showmode
-set noeb vb t_vb=
-
-" omni completion
-"set omnifunc=syntaxcomplete#Complete
-
-"don't fold by default
-set foldlevel=99
-
-" don't replace tab with space
-autocmd FileType proto set noexpandtab
-autocmd FileType proto set smartindent
-
-autocmd FileType c,cpp,h set smartindent 
-    
-
-
-" ## ctags : look for tags from . to home ##
-set tags=./tags,tags;$HOME
-
-
-" ## colors ##
-set t_Co=256
-let g:molokai_original=1
-let g:rehash256 = 1
-colorscheme molokai
-syntax on
-highlight Visual term=reverse ctermbg=White ctermfg=Black
-
-
-" ## tabs ##
-let tabMinWidth=0
-let tabMaxWidth=40
-let tabMinWidthResized=15
-let tabScrollOff=5
-let tabEllipsis="..."
-let tabDivideEquel=0
-set showtabline=2
-set ambiwidth=double
-
-nnoremap th  :tabfirst<CR>
-nnoremap tj  :tabprev<CR>
-nnoremap tk  :tabnext<CR>
-nnoremap tl  :tablast<CR>
-nnoremap tt  :tabedit<Space>
-nnoremap tn  :tabnew<Space>
-nnoremap tm  :tabm<Space>
-nnoremap td  :tabclose<CR>
-" Alternatively use
-"nnoremap th :tabnext<CR>
-"nnoremap tl :tabprev<CR>
-"nnoremap tn :tabnew<CR>
-
-
-" ## buffers ##
-" switching buffers without saving warning
-set hidden
-
-nnoremap bn :bn<CR>
-nnoremap bf :bp<CR>
-nnoremap bg :e#<CR>
-nnoremap b1 :1b<CR>
-nnoremap b2 :2b<CR>
-nnoremap b3 :3b<CR>
-nnoremap b4 :4b<CR>
-nnoremap b5 :5b<CR>
-nnoremap b6 :6b<CR>
-nnoremap b7 :7b<CR>
-nnoremap b8 :8b<CR>
-nnoremap b9 :9b<CR>
-nnoremap b0 :10b<CR>
-
-
-" Use ctrl-[hjkl] to select the active split!
-nmap <silent> <c-s-k> :wincmd k<CR>                                                                                                                       
-nmap <silent> <c-s-j> :wincmd j<CR>                                                                                                                       
-nmap <silent> <c-s-h> :wincmd h<CR>                                                                                                                       
-nmap <silent> <c-s-l> :wincmd l<CR>
+set smartindent
+set mouse=a               " Enable mouse
+set hidden                " Allow switching buffers without saving
+set nobackup
+set nowritebackup
+set updatetime=300        " Faster completion
+set shortmess+=c          " Don't pass messages to |ins-completion-menu|
+set signcolumn=yes        " Always show sign column (for lints)
 set splitright
 set splitbelow
+set scrolloff=8           " Keep cursor in middle
+set backspace=indent,eol,start
 
+" Performance
+set timeoutlen=400        " Faster leader key response
+set ttimeoutlen=0         " No delay for key codes
 
-" ## Tagbar outliner ##
-nmap <F8> :TagbarToggle<CR>
+" Colors
+set t_Co=256
+set background=dark
+try
+    colorscheme molokai
+catch
+    colorscheme desert
+endtry
 
-" Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-"autocmd FileType python setlocal omnifunc=jedi#completions
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+" --- 3. Key Mappings ---
 
-set completeopt=longest,menuone
+" Fast saving
+nmap <leader>w :w<CR>
 
+" Window navigation (Ctrl+h/j/k/l)
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
-" ## deoplete ##
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-call deoplete#enable()
+" Buffer navigation
+nnoremap <leader>bn :bn<CR>
+nnoremap <leader>bp :bp<CR>
+nnoremap <leader>bd :bd<CR>
 
-" for tab to select options
-" Disable this for not overwriting <cr> to have delimitMate_expand_cr work
-" correctly
-" Just select in the popup with <C-n>, <C-P>
-"inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-"function! s:my_cr_function()
-  "return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-"endfunction
-"inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" Quick Buffer Switching (Shift+H / Shift+L)
+nnoremap H :bp<CR>
+nnoremap L :bn<CR>
 
+" NERDTree -> Coc-explorer
+" Install via: :CocInstall coc-explorer
+nmap <F9> :CocCommand explorer<CR>
 
-" ## cscope ##
-if has("cscope")
-  let &csprg=substitute(system('which cscope'), '\n\+$', '', '')
-  set csto=1
-  set cst
-  set nocsverb
-  " add any database in current directory
-  if filereadable("cscope.out")
-      cs add cscope.out
+" Fzf (Ctrl+P replacement)
+nnoremap <C-p> :Files<CR>
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>f :Rg<CR>
+
+" Tagbar -> Vista
+" Uses Coc (LSP) instead of ctags
+let g:vista_default_executive = 'coc'
+nmap <F8> :Vista!!<CR>
+
+" --- 4. Coc.nvim Configuration (The Magic) ---
+
+" Use Tab for trigger completion with characters ahead and navigate
+inoremap <silent><expr> <TAB>
+      \ coc#pum#visible() ? coc#pum#next(1) :
+      \ CheckBackspace() ? "\<Tab>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
   endif
-  set csverb
-endif
+endfunction
 
-nmap <C-@>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-@>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-@>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-@>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
 
-" ## airline ##
-set laststatus=2
-"set guifont=Meslo\ LG\ M\ Regular\ for\ Powerline\ 13
-set guifont=Monaco\ for\ Powerline\ 12.5
-" enable powerline-fonts
-let g:airline_powerline_fonts = 1"
-" show opened buffers
+" Formatting
+command! -nargs=0 Format :call CocActionAsync('format')
+nmap <leader>fm :Format<CR>
+
+" --- 5. Language Specific ---
+
+" Go
+let g:go_def_mapping_enabled = 0 " Let Coc handle definition jump
+let g:go_doc_keywordprg_enabled = 0 " Let Coc handle hover
+
+" Python
+let g:python3_host_prog = '/usr/bin/python3' " Adjust if needed
+
+" Airline
 let g:airline#extensions#tabline#enabled = 1
-
-
-" ## NERDTree ##
-autocmd VimEnter * wincmd p
-let NERDTreeShowBookmarks=1
-let NERDTreeChDirMode=0
-let NERDTreeQuitOnOpen=0
-let NERDTreeMouseMode=2
-let NERDTreeShowHidden=1
-let NERDTreeIgnore=['\.pyc','\~$','\.swo$','\.swp$','\.git','\.hg','\.svn','\.bzr']
-let NERDTreeKeepTreeInNewTab=1
-let g:nerdtree_tabs_open_on_gui_startup=0
-let NERDTreeMapOpenInTab='<ENTER>'
-map <f9> :NERDTreeToggle<CR>
-
-" ## emmet (html & css fast coding)
-let g:user_emmet_install_global=0
-autocmd FileType html,css,php EmmetInstall
-
-" ## closetag.vim (html xml auto close tag)
-" filenames like *.xml, *.html, *.xhtml, ...
-let g:closetag_filenames="*.html,*.xhtml,*.phtml,*.php"
-
-" ## python-mode
-let g:pymode_rope_goto_def_newwin = "new" " open found definition in new window
-let g:pymode_python='python3'
-let g:pymode_lint_on_write=1
-let g:pymode_trim_whitespaces=1
-let g:pymode_lint_checkers=['pyflakes', 'pep8', 'mccabe', 'pylint'] 
-let g:pymode_indent=2
-"let g:pymode_lint_ignore = "C0111"
-let g:pymode_lint_options_pylint = {'disable':'C0111'}
-
-" disable autocompletion by pymode, use jedi-vim &neo complete
-" due to conflict with jedi-vim. 
-" (don't want to auto-select first complete item)
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope_complete_on_dot = 0
-let g:pymode_rope=0
-autocmd BufWritePost *.py :PymodeLintAuto
-
-
-" ## vim-go
-" auto import at save
-let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 1
-
-
-" ## denite
-noremap .d :Denite -auto-resize file/rec buffer<CR>
-noremap .b :Denite -auto-resize buffer<CR>
-noremap .j :Denite -auto-resize jump<CR>
-noremap .l :Denite -auto-resize line<CR>
-noremap .p :Denite -auto-resize file/rec<CR>
-noremap .r :Denite -auto-resize outline<CR>
-
-" Define mappings
-autocmd FileType denite call s:denite_my_settings()
-function! s:denite_my_settings() abort
-  nnoremap <silent><buffer><expr> <CR>
-  \ denite#do_map('do_action')
-  nnoremap <silent><buffer><expr> d
-  \ denite#do_map('do_action', 'delete')
-  nnoremap <silent><buffer><expr> p
-  \ denite#do_map('do_action', 'preview')
-  nnoremap <silent><buffer><expr> q
-  \ denite#do_map('quit')
-  nnoremap <silent><buffer><expr> i
-  \ denite#do_map('open_filter_buffer')
-  nnoremap <silent><buffer><expr> <Space>
-  \ denite#do_map('toggle_select').'j'
-endfunction
-
-autocmd FileType denite-filter call s:denite_filter_my_settings()
-function! s:denite_filter_my_settings() abort
-  imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
-endfunction
-
-
-" ## deoplete-jedi
-"set omnifunc=jedi#completions
-setlocal omnifunc=python3complete#Complete
-
-
-let g:python3_host_prog = '/usr/bin/python3'
-
-
-" ## vim-clang-format
-" auto format on saving
-let g:clang_format#auto_format=1
-let g:clang_format#style_options = {
-            \ "AccessModifierOffset" : -4,
-            \ "AllowShortIfStatementsOnASingleLine" : "true",
-            \ "AlwaysBreakTemplateDeclarations" : "true",
-            \ "Standard" : "C++11",
-            \ "UseTab" : "false",
-            \ "ColumnLimit" : 0,
-            \ "BreakBeforeBraces" : "Attach",}
-
-
-" ## deoplete-clang
-" Requirement: install libclang and libclang(5, etc)-dev for shared libraries
-" and headers. Requires deoplete and vim8.
-if has('mac')
-    let g:deoplete#sources#clang#libclang_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
-    let g:deoplete#sources#clang#clang_header='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/'
-elseif has('unix')
-    let g:deoplete#sources#clang#libclang_path='/usr/lib/x86_64-linux-gnu/libclang.so.1'
-    let g:deoplete#sources#clang#clang_header='/usr/include/clang/'
-endif
-
-
-
-" ## DelimitMate
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
+let g:airline_powerline_fonts = 1

@@ -21,7 +21,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 
     echo "📦 Installing tools via Homebrew..."
-    brew install zsh starship zoxide eza bat fzf
+    brew install zsh starship zoxide eza bat fzf nodejs
 
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "🐧 Linux detected."
@@ -29,7 +29,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if [ -f /etc/debian_version ]; then
         echo "📦 Installing basics via apt..."
         sudo apt update
-        sudo apt install -y zsh curl git build-essential
+        sudo apt install -y zsh curl git build-essential nodejs npm
         
         # Install Eza (Official Repo)
         if ! command -v eza &> /dev/null; then
@@ -84,7 +84,22 @@ else
     echo "✅ Oh My Zsh already installed."
 fi
 
-# --- 3. Plugins Installation ---
+# --- 3. Vim Setup ---
+
+if [ ! -f "$HOME/.vim/autoload/plug.vim" ]; then
+    echo "🔌 Installing Vim-Plug..."
+    curl -fLo "$HOME/.vim/autoload/plug.vim" --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+fi
+
+echo "🔌 Installing Vim Plugins..."
+vim +PlugInstall +qall
+
+echo "🔌 Installing Coc Extensions..."
+# Install common extensions: Python, JSON, HTML, CSS, Shell, C++, Explorer
+vim +"CocInstall -sync coc-pyright coc-json coc-html coc-css coc-sh coc-clangd coc-explorer" +qall
+
+# --- 4. Plugins Installation (Zsh) ---
 
 install_plugin() {
     local name=$1
