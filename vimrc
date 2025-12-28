@@ -7,7 +7,6 @@ call plug#begin('~/.vim/plugged')
 
 " Essentials
 Plug 'tpope/vim-fugitive'        " Git integration
-Plug 'tpope/vim-fugitive'        " Git integration
 Plug 'preservim/nerdcommenter'   " Commenter
 Plug 'vim-airline/vim-airline'   " Status bar
 Plug 'vim-airline/vim-airline-themes'
@@ -50,6 +49,7 @@ set splitright
 set splitbelow
 set scrolloff=8           " Keep cursor in middle
 set backspace=indent,eol,start
+set clipboard^=unnamed,unnamedplus
 
 " Performance
 set timeoutlen=400        " Faster leader key response
