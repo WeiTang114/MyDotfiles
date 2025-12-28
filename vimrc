@@ -146,6 +146,11 @@ nmap <leader>fm :Format<CR>
 
 " --- 5. Language Specific ---
 
+" Disable Coc Diagnostics & Inlay Hints by default
+call coc#config('diagnostic.enable', v:false)
+call coc#config('inlayHint.enable', v:false)
+call coc#config('clangd.inlayHints.enable', v:false)
+
 " C/C++
 autocmd FileType c,cc,cpp,h set sts=2 ts=2 sw=2
 " Switch Source/Header (requires coc-clangd)
