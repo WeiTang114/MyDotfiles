@@ -202,3 +202,24 @@ nnoremap .b :Buffers<CR>
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1
+
+" --- 快速切換「乾淨模式」 (F12) ---
+" 隱藏行號、相對行號、Sign Column (Git/Linter 標記)
+let g:is_clean_mode = 0
+function! ToggleCleanMode()
+    if g:is_clean_mode == 0
+        set nonumber
+        set norelativenumber
+        set signcolumn=no
+"call coc#config('diagnostic.enable', v:true)
+        let g:is_clean_mode = 1
+        echo "Clean Mode: ON (Ready to copy)"
+    else
+        set number
+        set relativenumber
+        set signcolumn=yes
+        let g:is_clean_mode = 0
+        echo "Clean Mode: OFF"
+    endif
+endfunction
+nnoremap <F12> :call ToggleCleanMode()<CR>
