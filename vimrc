@@ -143,7 +143,13 @@ nmap <leader>rn <Plug>(coc-rename)
 command! -nargs=0 Format :call CocActionAsync('format')
 nmap <leader>fm :Format<CR>
 
+
 " --- 5. Language Specific ---
+
+" C/C++
+autocmd FileType c,cc,cpp,h set sts=2 ts=2 sw=2
+" Switch Source/Header (requires coc-clangd)
+nmap <leader>h :CocCommand clangd.switchSourceHeader<CR>
 
 " Go
 let g:go_def_mapping_enabled = 0 " Let Coc handle definition jump
@@ -151,6 +157,42 @@ let g:go_doc_keywordprg_enabled = 0 " Let Coc handle hover
 
 " Python
 let g:python3_host_prog = '/usr/bin/python3' " Adjust if needed
+
+" --- 6. Advanced FZF Configuration ---
+" Default fzf layout
+let g:fzf_layout = { 'down': '~40%' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+            \ { 'fg':      ['fg', 'Normal'],
+            \ 'bg':      ['bg', 'Normal'],
+            \ 'hl':      ['fg', 'Comment'],
+            \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+            \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+            \ 'hl+':     ['fg', 'Statement'],
+            \ 'info':    ['fg', 'PreProc'],
+            \ 'prompt':  ['fg', 'Conditional'],
+            \ 'pointer': ['fg', 'Exception'],
+            \ 'marker':  ['fg', 'Keyword'],
+            \ 'spinner': ['fg', 'Label'],
+            \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" Handy Mappings from Stash
+nnoremap <leader>fl :Lines<CR>
+nnoremap <leader>fb :BLines<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fg :GFiles<CR>
+nnoremap <leader>f? :GFiles?<CR>
+nnoremap <leader>ft :Tags<CR>
+nnoremap <leader>fa :Ag<CR>
+nnoremap <leader>fc :Commits<CR>
+
+" Quick shortcuts
+nnoremap .d :Files<CR>
+nnoremap .b :Buffers<CR>
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
