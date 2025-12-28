@@ -81,5 +81,19 @@ alias ta='tmux attach -t'
 alias tl='tmux list-sessions'
 alias ts='tmux new -s'
 
-# --- 6. Custom Configuration ---
+# --- 6. Common Settings ---
+
+# Secrets
+[ -f ~/.secrets.sh ] && . ~/.secrets.sh
+
+# Key Bindings (Alt+Arrows)
+bindkey "^[^[[C" forward-word
+bindkey "^[^[[D" backward-word
+
+# NVM (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# --- 7. Custom Configuration ---
 [ -f "$HOME/MyDotfiles/zshrc.custom" ] && source "$HOME/MyDotfiles/zshrc.custom"
