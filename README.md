@@ -23,6 +23,15 @@ It will automatically:
 ### 3. Restart Terminal
 Open a new terminal session to enjoy your new setup!
 
+## 🔤 Fonts
+This setup requires a **Nerd Font** to render icons correctly (e.g., in the prompt and status bar).
+The installer will try to install **Hack Nerd Font** for you on macOS.
+
+**Important:** You must manually configure your terminal to use this font:
+- **Terminal.app**: Preferences -> Profiles -> Text -> Font -> Change -> Select "Hack Nerd Font Mono"
+- **iTerm2**: Preferences -> Profiles -> Text -> Font -> Select "Hack Nerd Font Mono"
+
+
 ## 🔄 Reset / Update
 If you want to update your tools or reset your configuration:
 

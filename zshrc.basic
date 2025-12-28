@@ -13,8 +13,10 @@ plugins=(git zsh-autosuggestions fzf-tab zsh-completions zsh-syntax-highlighting
 
 source $ZSH/oh-my-zsh.sh
 
-
 # --- 2. 現代化工具初始化 (Rust Stack) ---
+
+# put brew in path
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # Starship: 極速 Prompt
 # 需先安裝: curl -sS https://starship.rs/install.sh | sh
@@ -65,7 +67,7 @@ typeset -U path
 
 # 重新組織 PATH (Autojump 與 Python 舊路徑已移除)
 # 將你個人的 bin 放在最前面，確保優先權
-export PATH="$HOME/bin:$HOME/.local/bin:$HOME/depot_tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$HOME/bin:$HOME/.local/bin:$HOME/depot_tools:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
 # 語言環境
 export LANG=en_US.UTF-8

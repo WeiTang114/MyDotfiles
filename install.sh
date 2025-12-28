@@ -21,7 +21,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 
     echo "📦 Installing tools via Homebrew..."
-    brew install zsh starship zoxide eza bat fzf nodejs
+    brew install zsh starship zoxide eza bat fzf nodejs --cask font-hack-nerd-font
 
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "🐧 Linux detected."
@@ -143,4 +143,5 @@ fi
 # --- 5. Finalize ---
 
 echo "🎉 Setup complete!"
+echo "⚠️  IMPORTANT: Please manually set your terminal font to 'Hack Nerd Font Mono' to fix any garbled icons."
 echo "Please restart your terminal or run: source ~/.zshrc"
