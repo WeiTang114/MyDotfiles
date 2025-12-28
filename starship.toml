@@ -9,6 +9,23 @@ scan_timeout = 1000
 success_symbol = "[➜](bold green)"
 error_symbol = "[✗](bold red)"
 
+# Configure directory path
+[directory]
+truncation_length = 0
+truncate_to_repo = false
+
+# Disable git commit hash
+[git_commit]
+disabled = true
+
+# Disable git branch
+[git_branch]
+disabled = true
+
+# Optimize git status
+[git_status]
+disabled = true
+
 # Show hostname
 [hostname]
 ssh_only = true
