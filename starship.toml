@@ -2,6 +2,7 @@
 
 # Insert a blank line between shell prompts
 add_newline = true
+scan_timeout = 1000
 
 # Replace the "❯" symbol
 [character]

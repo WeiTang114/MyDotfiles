@@ -26,12 +26,16 @@ fi
 
 # Starship: 極速 Prompt
 # 需先安裝: curl -sS https://starship.rs/install.sh | sh
-eval "$(starship init zsh)"
+if command -v starship &> /dev/null; then
+    eval "$(starship init zsh)"
+fi
 
 # zoxide: 智慧跳轉 (取代 autojump)
 # 需先安裝: brew install zoxide / apt install zoxide
-eval "$(zoxide init zsh)"
-alias j="z"
+if command -v zoxide &> /dev/null; then
+    eval "$(zoxide init zsh)"
+    alias j="z"
+fi
 
 
 # fzf: 模糊搜尋

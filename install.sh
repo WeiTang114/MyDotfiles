@@ -21,7 +21,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     fi
 
     echo "📦 Installing tools via Homebrew..."
-    brew install zsh starship zoxide eza bat fzf nodejs --cask font-hack-nerd-font
+    brew install zsh starship zoxide eza bat fzf nodejs tmux ripgrep fd vim --cask font-hack-nerd-font
 
 elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     echo "🐧 Linux detected."
@@ -29,7 +29,7 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
     if [ -f /etc/debian_version ]; then
         echo "📦 Installing basics via apt..."
         sudo apt update
-        sudo apt install -y zsh curl git build-essential nodejs npm
+        sudo apt install -y zsh curl git build-essential nodejs npm tmux ripgrep fd-find vim
         
         # Install Eza (Official Repo)
         if ! command -v eza &> /dev/null; then
@@ -69,6 +69,10 @@ elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
             git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
             ~/.fzf/install --all
         fi
+
+        # Link fd-find to fd
+        mkdir -p $HOME/.local/bin
+        ln -sf /usr/bin/fdfind $HOME/.local/bin/fd
 
     else
         echo "⚠️  Unsupported Linux distribution. Please install zsh, starship, zoxide, eza, bat, fzf manually."

@@ -16,7 +16,7 @@ This script works on **macOS** and **Ubuntu/Debian**.
 ```
 
 It will automatically:
-- Install dependencies (Zsh, Starship, Zoxide, Eza, Bat, Fzf).
+- Install dependencies (Zsh, Starship, Zoxide, Eza, Bat, Fzf, Tmux, Ripgrep, Fd, Vim).
 - Install Oh My Zsh and plugins.
 - Link configuration files.
 
