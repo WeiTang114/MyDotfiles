@@ -209,14 +209,11 @@ let g:is_clean_mode = 0
 function! ToggleCleanMode()
     if g:is_clean_mode == 0
         set nonumber
-        set norelativenumber
         set signcolumn=no
-"call coc#config('diagnostic.enable', v:true)
         let g:is_clean_mode = 1
         echo "Clean Mode: ON (Ready to copy)"
     else
         set number
-        set relativenumber
         set signcolumn=yes
         let g:is_clean_mode = 0
         echo "Clean Mode: OFF"
