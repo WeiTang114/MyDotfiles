@@ -26,6 +26,13 @@ disabled = true
 [git_status]
 disabled = true
 
+[git_state]
+disabled = true
+
+# Disable hg branch
+[hg_branch]
+disabled = true
+
 # Show hostname
 [hostname]
 ssh_only = true
