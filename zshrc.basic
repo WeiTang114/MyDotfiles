@@ -5,7 +5,7 @@ export ZSH=$HOME/.oh-my-zsh
 DISABLE_AUTO_UPDATE="true"
 DISABLE_LS_COLORS="true" # 讓 eza 接手
 DISABLE_AUTO_TITLE="true"
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # 載入 plugins (建議加裝 zsh-syntax-highlighting)
 # zsh-syntax-highlighting must be last
