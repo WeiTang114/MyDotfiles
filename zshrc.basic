@@ -51,7 +51,7 @@ alias la='eza -lah --git'
 alias tree='eza --tree'
 
 # bat (取代 cat)
-alias cat='bat'
+alias cat='bat -pp'
 
 # --- 9. Final Overrides ---s
 _zsh_autosuggest_start
